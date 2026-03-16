@@ -1,166 +1,84 @@
- 
-
-📦 Order Delivery Management System
-Project Overview
-
-This project is an Oracle SQL / PL/SQL Database Management System designed to manage orders and deliveries (Gestion des Livraisons des Commandes).
-
-It implements a complete relational database including schema design, business logic packages, validation triggers, and stored procedures to handle daily operations in a small sales and logistics environment.
-
-The system demonstrates a strong understanding of relational database design, SQL, and PL/SQL programming, using advanced database features such as tables, sequences, indexes, constraints, triggers, packages, procedures, functions, and cursors to enforce business rules and automate operations.
-
-✨ Features
-1️⃣ Core Functionalities
-📦 Article Management
-
-Add, update, search, and delete products.
-
-Manage item categories, stock quantities, and pricing information.
-
-Support both logical and physical deletion of items.
-
-👥 Customer Management
-
-Register and manage client information.
-
-Validate customer data such as phone numbers and postal codes.
-
-🛒 Order Management
-
-Create customer orders.
-
-Add order lines and validate product availability.
-
-Track and update order status.
-
-🚚 Delivery Management
-
-Schedule deliveries and assign drivers.
-
-Manage delivery status and dates.
-
-Validate delivery constraints.
-
-📜 Cancellation History
-
-Store the history of canceled orders.
-
-Track quantities, amounts, and timestamps.
-
-🧠 Business Rules and Validation
-
-The system enforces several business rules using constraints and triggers, including:
-
-Order state transitions:
-EC → PR → LI → SO, with cancellation states AN and AL.
-
-Automatic stock validation and updates when adding order lines.
-
-Delivery constraints:
-
-Only orders with state PR (Ready) can be delivered.
-
-A driver cannot exceed 15 deliveries per day per city.
-
-Delivery updates must respect time restrictions.
-
-Data validation:
-
-Phone number format
-
-Price consistency (selling price > purchase price)
-
-Unique constraints for clients and products.
-
-⚙️ Advanced Database Techniques
-
-The project uses several advanced database concepts:
-
-PL/SQL Packages for modular business logic.
-
-Stored Procedures and Functions for core operations.
-
-Cursors for processing query results.
-
-Exception Handling for safe data management.
-
-Indexes to improve query performance on:
-
-Order dates
-
-Customer IDs
-
-Product references.
-
-🛠️ Technology Stack
-
-Database: Oracle (11g / 12c)
-
-Language: SQL and PL/SQL
-
-Tools: Oracle SQL Developer / SQL*Plus
-
-🚀 Installation and Setup
-1️⃣ Create Schema Objects
-
-Execute the following scripts in your Oracle client:
-
-CreationDesTables.sql
-
-CreationDesSequences.sql
-
-CreationDesIndexes.sql
-
-2️⃣ Create Triggers
-
-Run the following trigger scripts:
-
-TrigArticles.sql
-
-TrigClients.sql
-
-TrigCommandes.sql
-
-TrigligneCommandes.sql
-
-TrigLivraisonCom.sql
-
-TrigPersonnel.sql
-
-3️⃣ Deploy PL/SQL Packages
-
-Run both the package specification and package body for each module:
-
-pkg_gestion_articles_spec.sql
-
-pkg_gestion_articles_body.sql
-
-pkg_gestion_commandes_spec.sql
-
-pkg_gestion_commandes_body.sql
-
-pkg_gestion_livraisons_spec.sql
-
-pkg_gestion_livraisons_body.sql
-
-4️⃣ Run Tests (Optional)
-
-Execute test scripts to validate the packages:
-
-pkg_gestion_articles_tests.sql
-
-pkg_gestion_commandes_tests.sql
-
-pkg_gestion_livraisons_tests.sql
-
-📖 Usage
-
-Use the PL/SQL packages to perform operations on the system.
-
-Example:
-
+ # Order Delivery Management System
+
+## Project Overview
+
+This project is a complete Oracle SQL / PL/SQL Database Management System for managing orders and deliveries (Gestion des Livraisons des Commandes). It includes schema design, business logic packages, data validation triggers, and procedures for day-to-day operations in a small sales/logistics environment.
+
+The system demonstrates a strong understanding of relational modeling, SQL, and PL/SQL programming, using techniques like tables, sequences, indexes, constraints, triggers, packages, procedures, functions, and cursors to enforce business rules and automate key tasks.
+
+## Features
+
+### 1. Core Functionalities
+- **Article Management**: Add, modify, search, and logically/physically delete items with stock, category, and pricing details.
+- **Customer Management**: Add and validate clients with phone/postal constraints.
+- **Order Management**: Create orders, add order lines, enforce stock checks, and update order states.
+- **Delivery Management**: Schedule deliveries, assign drivers, manage delivery status, and validate delivery constraints.
+- **Cancellation History**: Store canceled order history with quantities, amounts, and timestamps.
+
+### 2. Business Rules and Validation
+- Triggers and constraints ensure data integrity and business logic enforcement:
+  - Order states restricted transitions (EC, PR, LI, SO, AN, AL).
+  - Stock checks on order lines and automatic stock updates.
+  - Delivery rules: only "PR" orders can be delivered, max deliveries per driver per city per day, and time-based update restrictions.
+  - Input validation for phone numbers, prices, postal codes, and unique constraints.
+
+### 3. Advanced Database Techniques
+- Uses Oracle PL/SQL packages with procedures/functions for modular business operations.
+- Includes cursor-based operations and exception handling for safe data access.
+- Uses indexes for query performance on fields like order date, customer ID, and product references.
+
+## Technology Stack
+- **Database**: Oracle (11g/12c)
+- **Language**: SQL and PL/SQL
+
+## Installation and Setup
+
+### 1. Create schema objects
+Execute the following files in order in your Oracle client (SQL*Plus, SQL Developer, etc.):
+1. `CreationDesTables.sql`
+2. `CreationDesSequences.sql`
+3. `CreationDesIndexes.sql`
+
+### 2. Create triggers
+Run:
+- `TrigArticles.sql`
+- `TrigClients.sql`
+- `TrigCommandes.sql`
+- `TrigligneCommandes.sql`
+- `TrigLivraisonCom.sql`
+- `TrigPersonnel.sql`
+
+### 3. Deploy PL/SQL packages
+Run each package specification and body:
+- `pkg_gestion_articles_spec.sql`, `pkg_gestion_articles_body.sql`
+- `pkg_gestion_commandes_spec.sql`, `pkg_gestion_commandes_body.sql`
+- `pkg_gestion_livraisons_spec.sql`, `pkg_gestion_livraisons_body.sql`
+
+### 4. Run tests
+Optionally run:
+- `pkg_gestion_articles_tests.sql`
+- `pkg_gestion_commandes_tests.sql`
+- `pkg_gestion_livraisons_tests.sql`
+
+## Usage
+
+Use the package procedures and functions to manage operations. Example:
+```sql
 BEGIN
   pkg_gestion_commandes.p_ajouter_commande(1001);
 END;
 /
+```
+
+You can also query tables directly for reports and validation.
+
+## Contribution
+1. Fork this repository.
+2. Add/improve SQL/PLSQL scripts and packages.
+3. Add tests in the `pkg_*_tests.sql` files.
+4. Open a pull request with clear change descriptions.
+
+
+
+
 
